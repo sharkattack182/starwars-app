@@ -1,4 +1,5 @@
 var express = require("express");
+const { get } = require("http");
 
 var app = express();
 var PORT = 8080;
@@ -27,3 +28,23 @@ var obi = {
 
 
 // Routes
+app.get("/", function(req,res) {
+    res.send("Welcome to the Star Wars app! May the force be with you.")
+});
+
+app.get("/yoda", function(req,res) {
+    res.send(yoda);
+})
+
+app.get("/darthvader", function(req,res) {
+    res.send(darthVader);
+})
+
+app.get("/obiwan", function(req,res) {
+    res.send(obi)
+});
+
+
+app.listen(PORT, function() {
+    console.log("Now listening on PORT" + PORT)
+})
