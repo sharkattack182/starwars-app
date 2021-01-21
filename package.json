@@ -1,0 +1,22 @@
+{
+  "name": "starwars-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharkattack182/starwars-app.git"
+  },
+  "author": "Matthew Courtney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharkattack182/starwars-app/issues"
+  },
+  "homepage": "https://github.com/sharkattack182/starwars-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
