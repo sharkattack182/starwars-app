@@ -1,4 +1,5 @@
 var express = require("express");
+var path = require("path");
 
 var app = express();
 var PORT = 8080;
@@ -13,35 +14,34 @@ var characters = [
     name: "Yoda",
     role: "Jedi Master",
     age: 900,
-    forcePoints: 2000
+    forcePoints: 2000,
   },
   {
-    routeName: "darthmaul",
-    name: "Darth Maul",
+    routeName: "darthvader",
+    name: "Darth Vader",
     role: "Sith Lord",
-    age: 200,
-    forcePoints: 1200
+    age: 22,
+    forcePoints: 3000,
   },
   {
     routeName: "obiwankenobi",
     name: "Obi Wan Kenobi",
     role: "Jedi Master",
     age: 55,
-    forcePoints: 1350
-  }
+    forcePoints: 1350,
+  },
 ];
 
 // Routes
-app.get("/", function(req, res) {
-  res.send("Welcome to the Star Wars Page!");
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "page.html"));
 });
 
-app.get("/api/characters", function(req, res) {
+app.get("/api/characters", function (req, res) {
   return res.json(characters);
 });
 
-
-app.get("/api/characters/:character", function(req, res) {
+app.get("/api/characters/:character", function (req, res) {
   var chosen = req.params.character;
 
   for (var i = 0; i < characters.length; i++) {
@@ -49,16 +49,16 @@ app.get("/api/characters/:character", function(req, res) {
       return res.json(characters[i]);
     }
   }
-  return res.send("No character found");
+  return res.json(false);
 });
 
-app.post("/api/characters", function(req, res) {
+app.post("/api/characters", function (req, res) {
   var newCharacter = req.body;
   console.log(newCharacter);
   characters.push(newCharacter);
   res.json(newCharacter);
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
 });
