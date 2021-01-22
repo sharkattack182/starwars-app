@@ -1,55 +1,64 @@
 var express = require("express");
-const { get } = require("http");
-const { send } = require("process");
 
 var app = express();
 var PORT = 8080;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Data
 var characters = [
-    {
+  {
     routeName: "yoda",
     name: "Yoda",
     role: "Jedi Master",
     age: 900,
     forcePoints: 2000
-},
-{
-    routeName: "darthvader",
-    name: "Darth Vader",
+  },
+  {
+    routeName: "darthmaul",
+    name: "Darth Maul",
     role: "Sith Lord",
-    age: 22,
-    forcePoints: 3000
-},
-{
-    routeName: "obiwan",
+    age: 200,
+    forcePoints: 1200
+  },
+  {
+    routeName: "obiwankenobi",
     name: "Obi Wan Kenobi",
     role: "Jedi Master",
-    age: 38,
-    focePoints: 1500
-}]
+    age: 55,
+    forcePoints: 1350
+  }
+];
 
-console.log(characters.length)
 // Routes
-app.get("/", function(req,res) {
-    res.send("Welcome to the Star Wars app! May the force be with you.")
+app.get("/", function(req, res) {
+  res.send("Welcome to the Star Wars Page!");
 });
-app.get("/api/characters", function(req,res) {
-    return res.json(characters)
-})
 
-app.get("/api/characters/:character", function(req,res) {
-    var chosen = req.params.character
+app.get("/api/characters", function(req, res) {
+  return res.json(characters);
+});
 
-    console.log(chosen);
-    for(let i = 0; i < characters.length; i++) {
-        console.log(characters[i]);
-        if(chosen === characters[i].routeName) {
-            return res.json(characters[i])
-        }
+
+app.get("/api/characters/:character", function(req, res) {
+  var chosen = req.params.character;
+
+  for (var i = 0; i < characters.length; i++) {
+    if (chosen === characters[i].routeName) {
+      return res.json(characters[i]);
     }
-})
+  }
+  return res.send("No character found");
+});
+
+app.post("/api/characters", function(req, res) {
+  var newCharacter = req.body;
+  console.log(newCharacter);
+  characters.push(newCharacter);
+  res.json(newCharacter);
+});
 
 app.listen(PORT, function() {
-    console.log("Now listening on PORT" + PORT)
-})
+  console.log("App listening on PORT " + PORT);
+});
