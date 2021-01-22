@@ -33,16 +33,22 @@ var characters = [
 ];
 
 // Routes
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "page.html"));
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "view.html"));
 });
 
-app.get("/api/characters", function (req, res) {
+app.get("/add", function(req, res) {
+  res.sendFile(path.join(__dirname, "add.html"));
+});
+
+app.get("/api/characters", function(req, res) {
   return res.json(characters);
 });
 
-app.get("/api/characters/:character", function (req, res) {
+app.get("/api/characters/:character", function(req, res) {
   var chosen = req.params.character;
+
+  console.log(chosen);
 
   for (var i = 0; i < characters.length; i++) {
     if (chosen === characters[i].routeName) {
@@ -52,13 +58,15 @@ app.get("/api/characters/:character", function (req, res) {
   return res.json(false);
 });
 
-app.post("/api/characters", function (req, res) {
+
+app.post("/api/characters", function(req, res) {
   var newCharacter = req.body;
+  newCharacter.routeName = newCharacter.name.replace(/\s+/g, "").toLowerCase();
   console.log(newCharacter);
   characters.push(newCharacter);
   res.json(newCharacter);
 });
 
-app.listen(PORT, function () {
+app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
 });
