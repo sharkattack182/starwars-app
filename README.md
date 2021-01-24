@@ -16,7 +16,7 @@ CSS <img src="https://progress-bar.dev/0/">
 ## Links
 [GitHub](https://github.com/sharkattack182/starwars-app)
 <br>
-To download this file please click the green code button above.
+[Deployed](https://starwars-ex-app.herokuapp.com/)
 
 ## Visuals
 <img src="/imgs/main.PNG" alt="main">
